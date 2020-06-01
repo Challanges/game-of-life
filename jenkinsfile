@@ -2,8 +2,8 @@
 node ('GOLBUILD'){
 	stage ('GOL BUILD'){
 		git credentialsId: 'maven', url: 'https://github.com/Challanges/game-of-life.git'
-		sh label: '', script: '''ssh testuser@172.31.10.16 "mkdir -p/home/testsuer/artifacts"
-			                 scp  gameoflife-web/target/*.jar testuser@172.31.10.16:/home/testsuer/artifacts'''
+		sh label: '', script: '''ssh testuser@172.31.10.16 "mkdir -p/home/testuser/artifacts"
+			                 scp  gameoflife-web/target/*.jar testuser@172.31.10.16:/home/testuser/artifacts'''
 		
 		archiveArtifacts 'gameoflife-web/target/*.jar,gameoflife-web/target/*.war'
           	junit 'gameoflife-web/target/surefire-reports/*.xml'
