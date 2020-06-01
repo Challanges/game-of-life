@@ -26,10 +26,18 @@ node ('UBANTU') {
 
 node ('GOLBUILD'){
 	stage ('GOL BUILD'){
+		git credentialsId: 'maven', url: 'https://github.com/Challanges/game-of-life.git'
+		sh label: '', script: '''ssh testuser@172.31.10.16 "mkdir -p/home/testsuer/artifacts"
+scp  					gameoflife-web/target/*.jar testuser@172.31.10.16:/home/testsuer/artifacts'''
+		
+		archiveArtifacts 'gameoflife-web/target/*.jar,gameoflife-web/target/*.war'
+          	junit 'gameoflife-web/target/surefire-reports/*.xml'
 	}
 }
 node ('GOLDEV'){
 stage ('GOL DEV'){
+	echo " need to be copy all files *.jar and mvn clean install" 
+
 	}
 }
 node ('GOLINFRA'){
