@@ -1,0 +1,8 @@
+need to create 3 nodes. 
+Install Java, maven, UPGRADE os 
+
+
+                        { GameLBuild : label --> GBUILD
+                          GameLDEV   : label --> GDEV
+                          GameLINFRA : label --> GINFRA }
+   
