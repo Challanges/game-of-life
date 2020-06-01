@@ -8,6 +8,7 @@ Install Java, maven, UPGRADE os
  
 sudo apt-get update
 sudo apt-get install openjdk-8-jdk -y
+sudo apt-get install maven -y
 useradd -d /home/testuser -s /bin/bash testuser
 echo Lotus@12q | passwd –-stdin "testuser"
    
