@@ -5,4 +5,9 @@ Install Java, maven, UPGRADE os
                         { GameLBuild : label --> GBUILD
                           GameLDEV   : label --> GDEV
                           GameLINFRA : label --> GINFRA }
+ 
+sudo apt-get update
+sudo apt-get install openjdk-8-jdk -y
+useradd -d /home/testuser -s /bin/bash testuser
+echo Lotus@12q | passwd –-stdin "testuser"
    
