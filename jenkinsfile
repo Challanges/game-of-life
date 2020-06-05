@@ -1,19 +1,21 @@
 node ('GOLBUILD'){
 	stage ('GOL REPO'){
-		git credentialsId: 'b1f5f594-0e99-4c89-b613-08b7e58e2923', url: 'https://github.com/Challanges/game-of-life.git'
+	
+	git credentialsId: 'b1f5f594-0e99-4c89-b613-08b7e58e2923', url: 'https://github.com/Challanges/game-of-life.git'
+	
 	}
 
 	stage ('GOLPKG-BILD'){
-		sh label: '', script: 'mvn clean  test package'	
-	}
-	
-	
-	stage ('List Artifacts Upload'){
-		archiveArtifacts 'gameoflife-web/target/*.jar,gameoflife-web/target/*.war'
-        	##### sh label: '', script: '''sudo aws s3 cp $HOME/workspace/golbould1/gameoflife-web/target/*.war s3://1mynew-bucket/'''
-	}
 
+	sh label: '', script: 'mvn clean test package'	
+	}
 	
+	stage ('List Artifacts'){
+
+	archiveArtifacts 'gameoflife-web/target/*.jar,gameoflife-web/target/*.war'
+	sh label: '', script: '''sudo aws s3 rm s3://1mynew-bucket/*.war 
+sudo aws s3 cp $HOME/workspace/golbould1/gameoflife-web/target/*.war s3://1mynew-bucket/'''
+	}
 }
 
 node ('GOLDEV'){
@@ -22,33 +24,13 @@ node ('GOLDEV'){
 	}
 
 	stage ('GOL INSTALL'){
-		sh label: '', script: 'mvn install'	
-	
+	sh label: '', script: 'mvn install'	
 	}
 
 	stage ('GOL Run'){
-		sh label: '', script: 'mvn jetty:run'	
-		}
-}
 
-------------------------------------------------
-node ('GOLBUILD'){
-	stage ('GOL BUILD'){
-		git credentialsId: 'maven', url: 'https://github.com/Challanges/game-of-life.git'
-		sh label: '', script: '''ssh testuser@172.31.10.16 "mkdir -p/home/testuser/artifacts"
-			                 scp  gameoflife-web/target/*.jar testuser@172.31.10.16:/home/testuser/artifacts'''
-		
-		archiveArtifacts 'gameoflife-web/target/*.jar,gameoflife-web/target/*.war'
-          	junit 'gameoflife-web/target/surefire-reports/*.xml'
-	}
-}
-node ('GOLDEV'){
-stage ('GOL DEV'){
-	echo " need to be copy all files *.jar and mvn clean install" 
-
-	}
-}
-node ('GOLINFRA'){
-stage ('GOL INFRA'){
+	sh label: '', script: '''cd $HOME/workspace/GOLDEV1/gameoflife-web 
+mvn jetty:run, 	'''
+	
 	}
 }
