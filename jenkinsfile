@@ -14,7 +14,7 @@ node ('GOLBUILD'){
 
 	archiveArtifacts 'gameoflife-web/target/*.jar,gameoflife-web/target/*.war'
 	sh label: '', script: '''sudo aws s3 rm s3://1mynew-bucket/*.war 
-sudo aws s3 cp $HOME/workspace/golbould1/gameoflife-web/target/*.war s3://1mynew-bucket/'''
+sudo aws s3 cp $HOME/workspace/Challenge/gameoflife-web/target/*.war s3://1mynew-bucket/'''
 	}
 }
 
@@ -29,7 +29,7 @@ node ('GOLDEV'){
 
 	stage ('GOL Run'){
 
-	sh label: '', script: '''cd $HOME/workspace/GOLDEV1/gameoflife-web 
+	sh label: '', script: '''cd $HOME/workspace/Challenge/gameoflife-web 
 mvn jetty:run, 	'''
 	
 	}
