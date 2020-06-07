@@ -30,14 +30,16 @@ node ('GOLDEV'){
 	stage ('GOL Run'){
 
 	sh label: '', script: '''cd $HOME/workspace/Challenge/gameoflife-web 
-mvn jetty:run &'''
+				 mvn jetty:run &'''
 	
+			}
 	}
-}
 
 node ('TINFRA'){
 	stage ('DEPLOY'){
-	sh label: '', script: 'teraform init /home/tuser/project/ , terraform apply -auto-approve /home/tuser/project/'
+	sh label: '', script: '''cd $HOME/project
+				 terraform init . 
+				 terraform apply  -auto-approve . '''
 		
-	}
-	}
+			}
+		}
