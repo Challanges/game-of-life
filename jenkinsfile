@@ -30,7 +30,7 @@ node ('GOLDEV'){
 	stage ('GOL Run'){
 
 	sh label: '', script: '''cd $HOME/workspace/Challenge/gameoflife-web 
-mvn jetty:run 	&'''
+mvn jetty:run &'''
 	
 	}
 }
