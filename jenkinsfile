@@ -34,3 +34,10 @@ mvn jetty:run &'''
 	
 	}
 }
+
+node ('TINFRA'){
+	stage ('DEPLOY'){
+	sh label: '', script: 'teraform init /home/tuser/project/ , terraform apply -auto-approve /home/tuser/project/'
+		
+	}
+	}
